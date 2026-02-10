@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Hopper Lite Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .card { margin-bottom: 20px; }
+        .status-running { color: #28a745; font-weight: bold; }
+        .status-stopped { color: #dc3545; font-weight: bold; }
+        .navbar { margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Crypto Hopper Lite Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">Bot Control</div>
+                    <div class="card-body">
+                        <p>Status: <span id="bot-status" class="status-stopped">Stopped</span></p>
+                        <p>Last Tick: <span id="last-tick">-</span></p>
+                        <div class="d-grid gap-2">
+                            <button id="start-btn" class="btn btn-success">Start Bot</button>
+                            <button id="stop-btn" class="btn btn-danger" disabled>Stop Bot</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card shadow-sm">
+                    <div class="card-header bg-info text-white">Market Data</div>
+                    <div class="card-body">
+                        <p>Latest Price: <span id="latest-price" class="fw-bold">-</span></p>
+                        <p>Last Signal: <span id="last-signal" class="badge bg-secondary">-</span></p>
+                        <p>Current Position: <span id="current-position" class="fw-bold">None</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">Trade History</div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Side</th>
+                                        <th>Symbol</th>
+                                        <th>Amount</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trade-history">
+                                    <!-- Trades will be populated here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="no-trades" class="text-center text-muted">No trades executed yet.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateState() {
+            fetch('/api/state')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) return;
+
+                    const statusElem = document.getElementById('bot-status');
+                    statusElem.textContent = data.is_running ? 'Running' : 'Stopped';
+                    statusElem.className = data.is_running ? 'status-running' : 'status-stopped';
+
+                    document.getElementById('start-btn').disabled = data.is_running;
+                    document.getElementById('stop-btn').disabled = !data.is_running;
+
+                    document.getElementById('last-tick').textContent = data.last_tick || '-';
+                    document.getElementById('latest-price').textContent = data.latest_price ? data.latest_price.toFixed(2) : '-';
+
+                    const signalElem = document.getElementById('last-signal');
+                    signalElem.textContent = (data.last_signal || '-').toUpperCase();
+                    if (data.last_signal === 'buy') signalElem.className = 'badge bg-success';
+                    else if (data.last_signal === 'sell') signalElem.className = 'badge bg-danger';
+                    else signalElem.className = 'badge bg-secondary';
+
+                    document.getElementById('current-position').textContent = data.position ? data.position.toUpperCase() : 'NONE';
+
+                    const historyBody = document.getElementById('trade-history');
+                    const noTradesElem = document.getElementById('no-trades');
+
+                    if (data.trades && data.trades.length > 0) {
+                        noTradesElem.style.display = 'none';
+                        historyBody.innerHTML = '';
+                        data.trades.slice().reverse().forEach(trade => {
+                            const row = `<tr>
+                                <td>${trade.timestamp}</td>
+                                <td><span class="badge ${trade.side === 'buy' ? 'bg-success' : 'bg-danger'}">${trade.side.toUpperCase()}</span></td>
+                                <td>${trade.symbol}</td>
+                                <td>${trade.amount}</td>
+                                <td>${trade.price ? trade.price.toFixed(2) : '-'}</td>
+                            </tr>`;
+                            historyBody.innerHTML += row;
+                        });
+                    } else {
+                        noTradesElem.style.display = 'block';
+                        historyBody.innerHTML = '';
+                    }
+                })
+                .catch(err => console.error('Error fetching state:', err));
+        }
+
+        document.getElementById('start-btn').addEventListener('click', () => {
+            fetch('/api/start', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') updateState();
+                    else alert(data.message);
+                });
+        });
+
+        document.getElementById('stop-btn').addEventListener('click', () => {
+            fetch('/api/stop', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') updateState();
+                    else alert(data.message);
+                });
+        });
+
+        setInterval(updateState, 2000);
+        updateState();
+    </script>
+</body>
+</html>
