@@ -30,7 +30,7 @@ Step 'Installing IIS (static content + compression)...'
 if (Get-Command Install-WindowsFeature -ErrorAction SilentlyContinue) {
   # Windows Server
   Install-WindowsFeature -Name Web-Server,Web-Static-Content,Web-Default-Doc,`
-    Web-Stat-Compression,Web-Http-Compression-Dynamic,Web-Mgmt-Console `
+    Web-Stat-Compression,Web-Dyn-Compression,Web-Mgmt-Console `
     -IncludeManagementTools | Out-Null
 } else {
   # Windows client (10/11)
