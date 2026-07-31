@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ============================================================
+     DARK — "Jade": deep slate-green + emerald accent + warm gold
+     ============================================================ */
+  :root {
+    --background: 162 33% 6%;
+    --foreground: 150 18% 93%;
+
+    --card: 160 26% 9%;
+    --card-foreground: 150 18% 93%;
+
+    --muted: 158 14% 16%;
+    --muted-foreground: 150 8% 62%;
+
+    --accent: 160 24% 12%;
+    --accent-foreground: 150 18% 93%;
+
+    --primary: 162 68% 48%; /* emerald / jade */
+    --primary-foreground: 162 45% 8%; /* ink on emerald */
+
+    --secondary: 42 78% 60%; /* warm gold */
+    --secondary-foreground: 40 40% 10%;
+
+    --border: 158 16% 18%;
+    --input: 158 16% 16%;
+    --ring: 162 68% 48%;
+
+    --radius: 1rem;
+
+    color-scheme: dark;
+
+    /* Theme-aware brand surfaces */
+    --brand-gradient: linear-gradient(
+      135deg,
+      hsl(162 70% 50%) 0%,
+      hsl(176 66% 42%) 100%
+    );
+    --brand-radial: radial-gradient(
+      60% 60% at 50% 0%,
+      hsl(162 70% 45% / 0.16) 0%,
+      transparent 70%
+    );
+
+    /* Glass surface */
+    --glass-bg-top: hsl(150 20% 96% / 0.06);
+    --glass-bg-bottom: hsl(150 20% 96% / 0.02);
+    --glass-border: hsl(150 20% 96% / 0.09);
+    --glass-shadow: 0 1px 0 hsl(150 20% 96% / 0.04) inset;
+  }
+
+  /* ============================================================
+     LIGHT — "Daylight": warm cream + deep emerald + amber
+     ============================================================ */
+  :root.light {
+    --background: 38 80% 90%; /* warm cream (#FBEBCF) */
+    --foreground: 34 30% 12%;
+
+    --card: 40 70% 97%; /* near-white, lifts off the cream */
+    --card-foreground: 34 30% 12%;
+
+    --muted: 38 45% 85%;
+    --muted-foreground: 34 14% 38%;
+
+    --accent: 38 50% 87%;
+    --accent-foreground: 34 30% 12%;
+
+    --primary: 166 80% 26%; /* deep emerald for contrast on cream */
+    --primary-foreground: 40 60% 98%;
+
+    --secondary: 36 74% 38%; /* deeper amber */
+    --secondary-foreground: 40 60% 98%;
+
+    --border: 38 34% 80%;
+    --input: 38 40% 84%;
+    --ring: 166 80% 26%;
+
+    color-scheme: light;
+
+    --brand-gradient: linear-gradient(
+      135deg,
+      hsl(166 80% 28%) 0%,
+      hsl(180 72% 24%) 100%
+    );
+    --brand-radial: radial-gradient(
+      60% 60% at 50% 0%,
+      hsl(166 70% 40% / 0.12) 0%,
+      transparent 70%
+    );
+
+    --glass-bg-top: hsl(0 0% 100% / 0.78);
+    --glass-bg-bottom: hsl(0 0% 100% / 0.55);
+    --glass-border: hsl(36 22% 11% / 0.09);
+    --glass-shadow: 0 8px 24px -14px hsl(36 22% 11% / 0.25);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Accessible, visible keyboard focus */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.28);
+    color: hsl(var(--foreground));
+  }
+
+  /* Respect reduced motion globally */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Solid accent text — deliberately NOT a multi-hue gradient.
+     (Class name kept for continuity across components.) */
+  .text-gradient {
+    color: hsl(var(--primary));
+  }
+
+  /* Glassmorphic surface (theme-aware via CSS vars) */
+  .glass {
+    background: linear-gradient(
+      180deg,
+      var(--glass-bg-top) 0%,
+      var(--glass-bg-bottom) 100%
+    );
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* Emerald→teal edge that lights up on hover/focus */
+  .card-glow::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.85),
+      hsl(var(--secondary) / 0.7)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .card-glow:hover::before,
+  .card-glow:focus-within::before {
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image: linear-gradient(
+        hsl(var(--foreground) / 0.045) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, hsl(var(--foreground) / 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      #000 40%,
+      transparent 100%
+    );
+    -webkit-mask-image: radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      #000 40%,
+      transparent 100%
+    );
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Shift the Spline scene's baked-in purple screen toward brand emerald.
+     Only hued pixels move; the white/grey robot body is unaffected. */
+  .hero-robot canvas {
+    filter: hue-rotate(-120deg);
+  }
+}
+
+/* Slim custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 999px;
+  border: 2px solid hsl(var(--background));
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}

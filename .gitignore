@@ -1,0 +1,34 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+dist-ssr
+*.local
+
+# Build artifacts
+*.tsbuildinfo
+bhandari-ventures-dist.zip
+
+# NOTE: dist/ is intentionally committed so the Windows VPS can pull the
+# prebuilt site without installing Node. Rebuild + commit after code changes.
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local Claude Code config
+.claude/settings.local.json
