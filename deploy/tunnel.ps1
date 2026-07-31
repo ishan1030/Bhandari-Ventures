@@ -34,10 +34,15 @@ if (Get-Service -Name cloudflared -ErrorAction SilentlyContinue) {
   Start-Sleep -Seconds 2
 }
 
-Write-Host "`nPaste the Tunnel TOKEN from the Cloudflare dashboard" -ForegroundColor Yellow
-Write-Host "(Zero Trust > Networks > Tunnels > your tunnel > install command; the long eyJ... value):" -ForegroundColor Yellow
-$token = (Read-Host 'Token').Trim()
-if ([string]::IsNullOrWhiteSpace($token)) { throw 'No token entered.' }
+Write-Host "`nPaste the Tunnel TOKEN (the long eyJ... value) from the Cloudflare dashboard." -ForegroundColor Yellow
+Write-Host "Tip: you can paste the whole 'cloudflared.exe service install eyJ...' line too." -ForegroundColor DarkGray
+$raw = (Read-Host 'Token').Trim()
+# Be forgiving: accept the bare token OR the full install command it was copied from.
+$i = $raw.IndexOf('eyJ')
+$token = if ($i -ge 0) { $raw.Substring($i).Trim() } else { $raw }
+if ($token -notmatch '^eyJ[A-Za-z0-9_\-]+') {
+  throw "That doesn't look like a tunnel token. It should be a long string starting with 'eyJ'."
+}
 
 Write-Host "`n==> Installing and starting the cloudflared service..." -ForegroundColor Cyan
 & $exe service install $token
