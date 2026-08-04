@@ -9,8 +9,8 @@ import { site, waLink } from "@/lib/site";
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
   { label: "Ventures", href: "#ventures" },
-  { label: "How it works", href: "#how-it-works" },
   { label: "Work", href: "#work" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
 

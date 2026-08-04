@@ -66,26 +66,132 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Bhandari Ventures",
-        "url": "https://bhandariventures.com",
-        "image": "https://bhandariventures.com/og.svg",
-        "description": "AI automation and digital growth studio building websites, apps, business automation, and AI agents for businesses in Nepal and beyond.",
-        "email": "hello@bhandariventures.com",
-        "telephone": "+977-9704210604",
-        "areaServed": "NP",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Bharatpur",
-          "addressCountry": "NP"
-        },
-        "sameAs": ["https://github.com/ishan1030"],
-        "knowsAbout": [
-          "AI automation",
-          "Web development",
-          "Android app development",
-          "Business automation",
-          "AI agents"
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://bhandariventures.com/#org",
+            "name": "Bhandari Ventures",
+            "url": "https://bhandariventures.com",
+            "image": "https://bhandariventures.com/og.svg",
+            "description": "AI automation and digital growth studio building websites, apps, business automation, and AI agents for businesses in Nepal and beyond.",
+            "email": "hello@bhandariventures.com",
+            "telephone": "+977-9704210604",
+            "priceRange": "$$",
+            "areaServed": ["Nepal", "Worldwide"],
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Bharatpur",
+              "addressRegion": "Bagmati",
+              "addressCountry": "NP"
+            },
+            "sameAs": ["https://github.com/ishan1030"],
+            "knowsAbout": [
+              "AI automation",
+              "AI agents and chatbots",
+              "Web development",
+              "Android app development",
+              "Business automation"
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Website Design & Development",
+                    "description": "Fast, mobile-friendly websites that bring in customers and are easy to update."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Android App Development",
+                    "description": "Custom Android apps for shops, restaurants, salons, and services."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Business Automation",
+                    "description": "WhatsApp/SMS auto-replies, online bookings, invoicing, and reminders that save hours every week."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI Agent Builder",
+                    "description": "AI chatbots that answer customers, take orders, and book appointments 24/7."
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://bhandariventures.com/#website",
+            "url": "https://bhandariventures.com",
+            "name": "Bhandari Ventures",
+            "publisher": { "@id": "https://bhandariventures.com/#org" }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://bhandariventures.com/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What does Bhandari Ventures do?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Bhandari Ventures is an AI automation and digital growth studio based in Bharatpur, Nepal. We build websites, Android apps, business automation, and AI agents (chatbots) that help businesses attract customers, cut manual work, and grow — for shops, restaurants, salons, clinics, and services across Nepal and beyond."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Where is Bhandari Ventures located?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We're based in Bharatpur, Nepal, and work with local businesses across the country, plus clients anywhere in the world since most of what we build is delivered online."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much does a website or app cost in Nepal?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Every project is quoted individually and priced to be genuinely affordable for small and local businesses, with no bloated agency fees. Message us on WhatsApp at +977 9704210604 for a free quote and demo."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you build AI chatbots and business automation?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. We build AI agents that answer customers, take orders, and book appointments 24/7, plus automations like WhatsApp and SMS auto-replies, online booking, invoicing, and reminders that save hours every week."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you work with businesses outside Nepal?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. We're based in Bharatpur but work with businesses across Nepal and internationally. Websites, apps, automation, and AI agents are all delivered and supported online."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you offer support in Nepali?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Absolutely. We explain everything in plain language, in English or Nepali, with no confusing tech jargon."
+                }
+              }
+            ]
+          }
         ]
       }
     </script>
@@ -96,8 +202,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/assets/index-CjU6x1vl.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-BDhhlY1t.css">
+    <script type="module" crossorigin src="/assets/index-Dux_cxvi.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-96H1nsj9.css">
   </head>
   <body>
     <div id="root"></div>

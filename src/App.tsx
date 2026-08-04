@@ -6,6 +6,7 @@ import { Ventures } from "@/components/sections/ventures";
 import { WhyUs } from "@/components/sections/why-us";
 import { HowItWorks } from "@/components/sections/how-it-works";
 import { Proof } from "@/components/sections/proof";
+import { Faq } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
 import { waLink } from "@/lib/site";
@@ -37,6 +38,7 @@ function App() {
           <WhyUs />
           <HowItWorks />
           <Proof />
+          <Faq />
           <Contact />
         </div>
       </main>
