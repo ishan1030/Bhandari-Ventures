@@ -2,8 +2,10 @@ import { MessageCircle } from "lucide-react";
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { Services } from "@/components/sections/services";
+import { Ventures } from "@/components/sections/ventures";
 import { WhyUs } from "@/components/sections/why-us";
 import { HowItWorks } from "@/components/sections/how-it-works";
+import { Proof } from "@/components/sections/proof";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
 import { waLink } from "@/lib/site";
@@ -31,8 +33,10 @@ function App() {
             className="pointer-events-none absolute inset-0 -z-10 bg-grid"
           />
           <Services />
+          <Ventures />
           <WhyUs />
           <HowItWorks />
+          <Proof />
           <Contact />
         </div>
       </main>

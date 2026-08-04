@@ -34,24 +34,25 @@ export function Hero() {
       <div className="pointer-events-none relative z-20 mx-auto flex max-w-4xl flex-col items-center px-6 text-center text-foreground">
         <span className="pointer-events-auto mb-6 inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-foreground/5 px-4 py-1.5 text-xs font-medium text-foreground/90 backdrop-blur-md animate-fade-up">
           <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-          {site.location} · serving local businesses everywhere
+          {site.location} · AI automation &amp; digital growth studio
         </span>
 
         <h1
-          className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-7xl animate-fade-up"
+          className="font-display text-4xl font-bold leading-[1.04] tracking-tight text-balance sm:text-6xl lg:text-[4.7rem] animate-fade-up"
           style={{ animationDelay: "80ms" }}
         >
-          Grow your business online —{" "}
-          <span className="text-primary">we handle the tech.</span>
+          AI-powered systems that{" "}
+          <span className="text-primary">automate, capture, and scale</span>{" "}
+          your business.
         </h1>
 
         <p
           className="mt-6 max-w-2xl text-base text-muted-foreground text-balance sm:text-lg animate-fade-up"
           style={{ animationDelay: "160ms" }}
         >
-          Simple, affordable websites, apps, and AI tools for shops,
-          restaurants, salons, and clinics. No tech knowledge needed — we build
-          it, you get more customers.
+          Bhandari Ventures builds websites, apps, automations, and AI agents
+          that cut manual work, win more customers, and help you grow — we
+          handle the technology so you don't have to.
         </p>
 
         <div

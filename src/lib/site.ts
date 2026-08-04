@@ -4,8 +4,10 @@
  */
 export const site = {
   name: "Bhandari Ventures",
-  tagline: "Grow your business online — we handle the tech.",
+  tagline:
+    "AI-powered systems that help businesses automate, capture customers, and scale.",
   location: "Bharatpur, Nepal",
+  url: "https://bhandariventures.com",
   email: "hello@bhandariventures.com",
   // Phone in international format (Nepal +977).
   phoneDisplay: "+977 9704210604",
@@ -15,11 +17,15 @@ export const site = {
   whatsappMessage:
     "Hi Bhandari Ventures! I'd like a free demo for my business.",
   splineScene: "https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode",
+  // GitHub — used as verifiable proof of real, shipped work.
+  githubUser: "ishan1030",
+  github: "https://github.com/ishan1030",
+  githubRepo: "https://github.com/ishan1030/Bhandari-Ventures",
   socials: {
     facebook: "https://facebook.com",
     instagram: "https://instagram.com",
     linkedin: "https://linkedin.com",
-    github: "https://github.com/ishan1030/Bhandari-Ventures",
+    github: "https://github.com/ishan1030",
   },
 } as const;
 
