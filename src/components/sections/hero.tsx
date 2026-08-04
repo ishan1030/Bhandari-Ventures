@@ -28,6 +28,16 @@ export function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-40 bg-gradient-to-t from-background to-transparent"
       />
+      {/* Spotlight scrim directly behind the text so it stays readable over
+          the robot, while the robot still shows through around the edges. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-10"
+        style={{
+          background:
+            "radial-gradient(58% 46% at 50% 43%, hsl(var(--background) / 0.86) 0%, hsl(var(--background) / 0.5) 46%, transparent 72%)",
+        }}
+      />
 
       {/* Text overlay — pointer-events-none so the robot stays interactive.
           Interactive children re-enable pointer events individually. */}
@@ -38,7 +48,7 @@ export function Hero() {
         </span>
 
         <h1
-          className="font-display text-4xl font-bold leading-[1.04] tracking-tight text-balance sm:text-6xl lg:text-[4.7rem] animate-fade-up"
+          className="hero-legible font-display text-4xl font-bold leading-[1.04] tracking-tight text-balance sm:text-6xl lg:text-[4.7rem] animate-fade-up"
           style={{ animationDelay: "80ms" }}
         >
           AI-powered systems that{" "}
@@ -47,7 +57,7 @@ export function Hero() {
         </h1>
 
         <p
-          className="mt-6 max-w-2xl text-base text-muted-foreground text-balance sm:text-lg animate-fade-up"
+          className="hero-legible mt-6 max-w-2xl text-base text-foreground/85 text-balance sm:text-lg animate-fade-up"
           style={{ animationDelay: "160ms" }}
         >
           Bhandari Ventures builds websites, apps, automations, and AI agents

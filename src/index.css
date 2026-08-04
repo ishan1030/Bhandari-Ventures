@@ -208,6 +208,13 @@
     text-wrap: balance;
   }
 
+  /* Halo that lifts hero text off the busy 3D scene behind it */
+  .hero-legible {
+    text-shadow:
+      0 2px 28px hsl(var(--hero-scrim, var(--background))),
+      0 1px 6px hsl(var(--hero-scrim, var(--background)) / 0.95);
+  }
+
   /* Shift the Spline scene's baked-in purple screen toward brand emerald.
      Only hued pixels move; the white/grey robot body is unaffected. */
   .hero-robot canvas {
